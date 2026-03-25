@@ -1,4 +1,4 @@
-# PRD: Agentic Lead Generation and Scheduling for SMBs
+# Product Requirements Document
 
 ---
 
@@ -160,3 +160,13 @@ This version focuses on support, product/service overview, and autonomous appoin
 3. Maintaining personalization with stateful interactions over time  
 4. Ensuring data security and compliance with DPDP regulations  
 5. Scaling performance as conversations and data grow  
+
+# High Level Architecture
+
+---
+
+### Agentic Layer
+<img width="800" height="800" alt="Flowbiz_AgenticPlugin" src="https://github.com/user-attachments/assets/59de808f-d46b-46ad-960a-43ec602dba2c" />
+
+
+
