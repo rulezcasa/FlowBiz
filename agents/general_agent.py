@@ -1,19 +1,14 @@
 from langchain.agents import create_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
-from tools.query_catalogue import get_services
 from dotenv import load_dotenv
 from state.state_manager import get_state
 import os
 
 """
-    Agent to Fetch salon services filtered by category and gender and respond to user query.
+    Agent to answer general questions about the saloon
 
     Returns:
         str: User friendly LLM response.
-
-    Notes:
-        To do : Multiple category queries.
-        Try out prompt markup language (.pml)
 """
 
 # --- Config --- 
@@ -22,17 +17,16 @@ GOOGLE_KEY = os.getenv("GOOGLE_API_KEY")
 
 model = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=GOOGLE_KEY)
 
-with open("prompts/service_agent.md", "r", encoding="utf-8") as f:
+with open("prompts/general_agent.md", "r", encoding="utf-8") as f:
     system_prompt = f.read()
 
 agent=create_agent(
         model=model, 
-        tools=[get_services],
         system_prompt = system_prompt
         )
 
 
-def invoke_service_agent(phone):
+def invoke_general_agent(phone):
     current_state=get_state(phone)
     response = agent.invoke({
         'messages': [

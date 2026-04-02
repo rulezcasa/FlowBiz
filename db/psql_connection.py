@@ -22,7 +22,7 @@ engine = create_engine(
 )
 
 # --- Session ---
-SessionLocal = sessionmaker(
+psqlSession = sessionmaker(
     autocommit=False,
     autoflush=False,
     bind=engine
@@ -30,7 +30,7 @@ SessionLocal = sessionmaker(
 
 # --- Dependency (use for fastAPI dependency ingestion)---
 def get_db():
-    db = SessionLocal()
+    db = psqlSession()
     try:
         yield db
     finally:
