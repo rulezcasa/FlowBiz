@@ -1,4 +1,4 @@
-# Product Requirements
+# Agentic Lead Generation and Scheduling for SMEs
 
 ---
 
@@ -6,7 +6,7 @@
 
 ### Introduction and Opportunity
 
-The rise of chatbots and agentic AI has reshaped how businesses engage with customers for sales and service delivery. While large enterprises rely on dedicated CRM software and catalog-driven platforms with integrated AI capabilities, the majority of SMBs in India continue to operate primarily through WhatsApp and phone calls. Both business owners and customers prefer simple, conversational communication over migration to complex interfaces.
+The rise of chatbots and agentic AI has reshaped how businesses engage with customers for sales and service delivery. While large enterprises rely on dedicated CRM software and catalog-driven platforms with integrated AI capabilities, the majority of SMEs in India continue to operate primarily through WhatsApp and phone calls. Both business owners and customers prefer simple, conversational communication over migration to complex interfaces.
 
 This presents an opportunity to bring agentic capabilities directly into the communication channels SMBs already use without forcing them to adapt to heavy and unfamiliar systems.
 
