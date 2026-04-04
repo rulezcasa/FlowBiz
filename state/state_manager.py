@@ -8,10 +8,9 @@ import json
 
     To do:
         - Update persistent fields in psql
-
 """
 
-# Persistent data : psql
+# Fetch Persistent data : psql  
 def lookup_customer_data(phone):
     db=psqlSession()
     try:
@@ -47,7 +46,7 @@ def lookup_customer_data(phone):
             }
         
         return customer_data
-
+    
     finally:
         db.close()
 
@@ -55,10 +54,10 @@ def lookup_customer_data(phone):
 # def update_customer_data():
 
 
-# Get state from redis
+# Fetch state from redis
 def get_state(phone):
     customer_data = lookup_customer_data(phone)
-    key = f"customers:{customer_data['user_id']}:state"
+    key = f"customers:{customer_data['phone']}:state"
 
     # If state exists in redis
     existing = redisSession.get(key)
@@ -89,19 +88,19 @@ def get_state(phone):
 
 
 
-# Update state in redis
-def update_state(user_id, updated_state):
+# Update state in redis 
+def update_state(phone, updated_state):
 
-    key = f"customers:{user_id}:state"
+    key = f"customers:{phone}:state"
 
-    # --- Fetch existing state ---
+    # Fetch existing state 
     existing_raw = redisSession.get(key)
     existing_state = json.loads(existing_raw) if existing_raw else {}
 
-    # --- Merge (partial update) ---
+    # Merge (only updated/new fields)
     merged_state = {**existing_state, **updated_state}
 
-    # --- Required fields (after merge) ---
+    # Required fields (Validating existence of critical fields)
     required_fields = [
         "user_id",
         "phone",
@@ -116,11 +115,11 @@ def update_state(user_id, updated_state):
         if field not in merged_state:
             raise ValueError(f"Missing required field in state after update: {field}")
 
-    # --- Prevent critical None overwrite ---
+    # None handling (Validating user_id and phone cannot be None)
     if merged_state["user_id"] is None or merged_state["phone"] is None:
         raise ValueError("user_id and phone cannot be None")
 
-    # --- Save merged state ---
+    # Save the merged state onto Redis
     redisSession.set(key, json.dumps(merged_state))
 
     return merged_state

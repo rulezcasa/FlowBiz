@@ -1,4 +1,9 @@
 import redis
+from dotenv import load_dotenv
+import os
+
+load_dotenv
+REDIS_PASSWORD = os.getenv("REDIS_PASSWORD") 
 
 # --- Session ---
 redisSession = redis.Redis(

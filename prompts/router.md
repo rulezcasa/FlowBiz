@@ -52,8 +52,7 @@ Your **sole responsibility** is to:
 Extract ONLY if explicitly mentioned (use exact keys):
 - service_request (e.g., haircut, pedicure)
 - name
-- appointment_time
-- appointment_date
+- appointment_date_time : YYYY-MM-DD HH:MM:SS format 
 - gender (if mentioned)
 
 Do **not infer missing values**, do not hallucinate.
