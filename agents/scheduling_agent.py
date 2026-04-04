@@ -11,10 +11,8 @@ from tools.appointment_scheduler import get_service_data, check_availability, cr
 '''
 Agent to schedule appointments
 
-Flow :
-    1. get_service_data : Fetches service_id and and duration for the requested service via (category+gender) matching.
-    2. check_availability : Fetches available stylists for the requested time slot
-    3. create_appointment : Inserts appointment record and schedules it.
+    Returns:
+        str: User friendly LLM response.
 
 Notes:
     1. Uses time only for checking stylist schedule and timestamp for appointment conflict check
