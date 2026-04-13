@@ -2,6 +2,7 @@ from langchain.tools import tool
 from sqlalchemy import text
 from db.psql_connection import psqlSession
 import json
+from typing import List
 
 """
     Tool to Fetch salon services filtered by category and gender.
@@ -19,25 +20,25 @@ import json
 
 
 @tool(description="Return available services based on the specified category and gender", return_direct=False)
-def get_services(category: str, gender: str) -> str:
+def get_services(category: List[str], gender: str) -> str:
     db = psqlSession()
     try:
         query = text("""
             SELECT service_name, price, metadata, description
             FROM profile_saloons.service_menu
-            WHERE category = :category
+            WHERE category = ANY(:category)
               AND gender = :gender
         """)
 
         result = db.execute(query, {
-            "category": category,
+            "category": category,  # pass list directly
             "gender": gender
         })
 
         rows = result.fetchall()
 
         if not rows:
-            return f"No services found for category '{category}' and gender '{gender}'."
+            return f"No services found for categories '{category}' and gender '{gender}'."
 
         formatted = []
 

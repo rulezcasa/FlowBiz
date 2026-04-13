@@ -3,6 +3,9 @@ from sqlalchemy import text
 from db.psql_connection import psqlSession
 from typing import List
 from datetime import datetime
+from config.logger import logging
+
+logger = logging.getLogger(__name__)
 
 '''
 Tools for appointment scheduling
@@ -20,30 +23,42 @@ Tools for appointment scheduling
 
 # Given the category and gender, returns the service_id and duration for appointment scheduling
 @tool(description="Return service_id and duration based on the specified category and gender", return_direct=False)
-def get_service_data(category: str, gender: str) -> str:
+def get_service_data(category: List[str], gender: str) -> str:
     db = psqlSession()
     try:
+        # Normalize to list
+        if isinstance(category, str):
+            category = [category]
+
         query = text("""
-            SELECT service_id, duration, service_name, description
+            SELECT service_id, duration, service_name, description, price
             FROM profile_saloons.service_menu
-            WHERE category = :category
+            WHERE category = ANY(:category)
               AND gender = :gender
         """)
+
         result = db.execute(query, {
             "category": category,
             "gender": gender
         })
+
         rows = result.fetchall()
+
         if not rows:
-            return f"No services found for category '{category}' and gender '{gender}'."
+            return f"No services found for categories '{category}' and gender '{gender}'."
 
         formatted = []
         for r in rows:
             formatted.append(
                 f"Service_id: {r.service_id}\n"
                 f"Duration: {r.duration}\n"
+                f"service_name: {r.service_name}\n"
+                f"description: {r.description}\n"
+                f"price: {r.price}\n"
             )
+
         return "\n\n".join(formatted)
+
     finally:
         db.close()
 
@@ -132,6 +147,13 @@ def create_appointment(
         }).scalar()
 
         db.commit()
+        logger.info(f"Appointment created successfully | user_id={user_id}, appointment_id={appointment_id}")
         return str(appointment_id)
+    
+    except Exception:
+        logger.exception(f"Error creating appointment | user_id={user_id}")
+        db.rollback()
+        raise
+
     finally:
         db.close()
