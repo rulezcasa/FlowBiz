@@ -23,6 +23,11 @@ Agent to schedule appointments
 Notes:
     1. Uses time only for checking stylist schedule and timestamp for appointment conflict check
     2. day_of_week mapped as (sunday to saturday : 0 to 6)
+
+To do:
+    1. Appointment checking
+    2. Appointment cancelling
+    3. Appointment reminders
 """
 
 

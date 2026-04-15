@@ -2,6 +2,10 @@ from fastapi import APIRouter, Request, Response
 from twilio.twiml.messaging_response import MessagingResponse
 from orchestrator.router import orchestrate
 
+'''
+Twillio whatsapp webhook implementation
+'''
+
 router = APIRouter()
 
 @router.post("/whatsapp/reply")
@@ -15,7 +19,10 @@ async def reply_whatsapp(request: Request):
     user_number = user_number[-10:]
 
 
+    # Call the orchestrator wth user message
     response=orchestrate(user_number,incoming_msg)
+    
+    #Response handling
     if isinstance(response, list) and all(isinstance(item, dict) and 'text' in item for item in response):
         texts = [item['text'] for item in response]
     else:

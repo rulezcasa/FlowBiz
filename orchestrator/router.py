@@ -12,9 +12,6 @@ from langsmith.run_helpers import get_current_run_tree
 
 """
     Orchestrator model to extract intent, build state and dispatch queries to agents
-
-    Notes:
-        To do : Appointment agent
 """
 
 # Config
@@ -25,6 +22,7 @@ with open("prompts/router.md", "r", encoding="utf-8") as f:
     system_prompt = f.read()
 
 
+# Dispatcher : based on the active agent set by the orchestrator, invoke the corresponding agent
 def dispatcher(phone, agent):
     # Service Agent
     if agent=='service_agent':
@@ -42,10 +40,11 @@ def dispatcher(phone, agent):
         return response
     
 
+# Orchestrator : Entry point into the agentic layer - extracts intent/entities and calls dispatcher.
 def orchestrate(phone,message=None):
     saved_state=get_state(phone)
-    history = saved_state.get("conversation_history", [])
-    history = deque(history, maxlen=5)
+    history = saved_state.get("conversation_history", []) # Retrieve conversation history if available
+    history = deque(history, maxlen=5) # Conversation history of size 5 (deque)
 
     messages = [
         SystemMessage(content=system_prompt),
