@@ -166,7 +166,8 @@ This version focuses on support, product/service overview, and autonomous appoin
 ---
 
 ### Agentic Layer
-<img width="800" height="800" alt="Flowbiz_AgenticPlugin" src="https://github.com/user-attachments/assets/59de808f-d46b-46ad-960a-43ec602dba2c" />
+<img width="3204" height="2484" alt="Flowbiz_ProfileSaloons" src="https://github.com/user-attachments/assets/b8d7e1a4-07a5-47dc-bb2e-15f5c4246526" />
+
 
 
 
