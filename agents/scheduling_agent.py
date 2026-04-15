@@ -12,6 +12,7 @@ from tools.appointment_scheduler import (
 )
 from langsmith import traceable
 from utils.helpers import timestamp_to_day_of_week
+from langsmith.run_helpers import get_current_run_tree
 
 """
 Agent to schedule appointments

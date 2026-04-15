@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from state.state_manager import get_state, update_state
 import os
 from langsmith import traceable
+from langsmith.run_helpers import get_current_run_tree
 
 """
     Agent to answer general questions about the saloon
@@ -29,6 +30,14 @@ def invoke_general_agent(phone):
     current_state = None
     try:
         current_state = get_state(phone)
+
+        run_tree = get_current_run_tree()
+        if run_tree:
+            run_tree.metadata.update({
+            "phone": phone,
+            "user_id": current_state.get("user_id"),
+        })
+
         response = agent.invoke(
             {"messages": [{"role": "user", "content": current_state["user_message"]}]},
         )

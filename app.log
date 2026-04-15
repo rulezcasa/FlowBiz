@@ -1,0 +1,508 @@
+2026-04-14 17:06:25,512 | INFO | numexpr.utils | NumExpr defaulting to 10 threads.
+2026-04-14 17:06:31,726 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 17:06:31,829 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 17:06:35,584 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 17:06:35,591 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 17:06:35,610 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 17:06:35,619 | INFO | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-04-14 17:06:37,374 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 17:06:37,424 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 17:06:37,471 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:04:14,921 | INFO | numexpr.utils | NumExpr defaulting to 10 threads.
+2026-04-14 20:04:22,228 | INFO | uvicorn.error | Will watch for changes in these directories: ['/Volumes/Harish/FlowBiz']
+2026-04-14 20:04:22,229 | INFO | uvicorn.error | Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+2026-04-14 20:04:22,230 | INFO | uvicorn.error | Started reloader process [38181] using WatchFiles
+2026-04-14 20:04:30,061 | INFO | numexpr.utils | NumExpr defaulting to 10 threads.
+2026-04-14 20:04:31,085 | INFO | uvicorn.error | Started server process [38758]
+2026-04-14 20:04:31,086 | INFO | uvicorn.error | Waiting for application startup.
+2026-04-14 20:04:31,090 | INFO | uvicorn.error | Application startup complete.
+2026-04-14 20:04:59,193 | INFO | uvicorn.error | Shutting down
+2026-04-14 20:04:59,297 | INFO | uvicorn.error | Waiting for application shutdown.
+2026-04-14 20:04:59,299 | INFO | uvicorn.error | Application shutdown complete.
+2026-04-14 20:04:59,299 | INFO | uvicorn.error | Finished server process [38758]
+2026-04-14 20:04:59,311 | INFO | uvicorn.error | Stopping reloader process [38181]
+2026-04-14 20:07:49,692 | INFO | numexpr.utils | NumExpr defaulting to 10 threads.
+2026-04-14 20:08:01,432 | INFO | uvicorn.error | Will watch for changes in these directories: ['/Volumes/Harish/FlowBiz']
+2026-04-14 20:08:01,433 | INFO | uvicorn.error | Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+2026-04-14 20:08:01,434 | INFO | uvicorn.error | Started reloader process [43495] using WatchFiles
+2026-04-14 20:08:07,926 | INFO | numexpr.utils | NumExpr defaulting to 10 threads.
+2026-04-14 20:08:08,944 | INFO | uvicorn.error | Started server process [43739]
+2026-04-14 20:08:08,945 | INFO | uvicorn.error | Waiting for application startup.
+2026-04-14 20:08:08,949 | INFO | uvicorn.error | Application startup complete.
+2026-04-14 20:11:43,807 | ERROR | state.state_manager | Error in lookup_customer_data
+Traceback (most recent call last):
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.StringDataRightTruncation: value too long for type character varying(10)
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Volumes/Harish/FlowBiz/state/state_manager.py", line 40, in lookup_customer_data
+    db.execute(insert_query, {"phone": phone})
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        statement,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        _add_event=_add_event,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 2258, in _execute_internal
+    result = conn.execute(
+        statement, params or {}, execution_options=execution_options
+    )
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.DataError: (psycopg2.errors.StringDataRightTruncation) value too long for type character varying(10)
+
+[SQL: 
+                INSERT INTO profile_saloons.customer_data (phone)
+                VALUES (%(phone)s)
+                ON CONFLICT (phone) DO NOTHING
+            ]
+[parameters: {'phone': 'whatsapp:+919035790945'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2026-04-14 20:11:43,816 | ERROR | uvicorn.error | Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.StringDataRightTruncation: value too long for type character varying(10)
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/uvicorn/protocols/http/httptools_impl.py", line 420, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/fastapi/applications.py", line 1163, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/starlette/applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Harish/FlowBiz/api/whatsapp.py", line 13, in reply_whatsapp
+    response=orchestrate(user_number,incoming_msg)
+  File "/Volumes/Harish/FlowBiz/orchestrator/router.py", line 46, in orchestrate
+    saved_state=get_state(phone)
+  File "/Volumes/Harish/FlowBiz/state/state_manager.py", line 113, in get_state
+    customer_data = lookup_customer_data(phone)
+  File "/Volumes/Harish/FlowBiz/state/state_manager.py", line 40, in lookup_customer_data
+    db.execute(insert_query, {"phone": phone})
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        statement,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        _add_event=_add_event,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 2258, in _execute_internal
+    result = conn.execute(
+        statement, params or {}, execution_options=execution_options
+    )
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/casarulez/anaconda3/envs/flowbiz/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.DataError: (psycopg2.errors.StringDataRightTruncation) value too long for type character varying(10)
+
+[SQL: 
+                INSERT INTO profile_saloons.customer_data (phone)
+                VALUES (%(phone)s)
+                ON CONFLICT (phone) DO NOTHING
+            ]
+[parameters: {'phone': 'whatsapp:+919035790945'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2026-04-14 20:13:17,374 | INFO | watchfiles.main | 1 change detected
+2026-04-14 20:13:17,378 | WARNING | uvicorn.error | WatchFiles detected changes in 'api/whatsapp.py'. Reloading...
+2026-04-14 20:13:17,441 | INFO | uvicorn.error | Shutting down
+2026-04-14 20:13:17,544 | INFO | uvicorn.error | Waiting for application shutdown.
+2026-04-14 20:13:17,544 | INFO | uvicorn.error | Application shutdown complete.
+2026-04-14 20:13:17,545 | INFO | uvicorn.error | Finished server process [43739]
+2026-04-14 20:13:17,929 | INFO | watchfiles.main | 1 change detected
+2026-04-14 20:13:18,289 | INFO | watchfiles.main | 3 changes detected
+2026-04-14 20:13:24,326 | INFO | numexpr.utils | NumExpr defaulting to 10 threads.
+2026-04-14 20:13:25,451 | INFO | uvicorn.error | Started server process [47165]
+2026-04-14 20:13:25,452 | INFO | uvicorn.error | Waiting for application startup.
+2026-04-14 20:13:25,456 | INFO | uvicorn.error | Application startup complete.
+2026-04-14 20:13:28,256 | INFO | watchfiles.main | 1 change detected
+2026-04-14 20:13:28,256 | WARNING | uvicorn.error | WatchFiles detected changes in 'api/whatsapp.py'. Reloading...
+2026-04-14 20:13:28,284 | INFO | uvicorn.error | Shutting down
+2026-04-14 20:13:28,386 | INFO | uvicorn.error | Waiting for application shutdown.
+2026-04-14 20:13:28,386 | INFO | uvicorn.error | Application shutdown complete.
+2026-04-14 20:13:28,386 | INFO | uvicorn.error | Finished server process [47165]
+2026-04-14 20:13:28,759 | INFO | watchfiles.main | 1 change detected
+2026-04-14 20:13:29,121 | INFO | watchfiles.main | 3 changes detected
+2026-04-14 20:13:34,530 | INFO | numexpr.utils | NumExpr defaulting to 10 threads.
+2026-04-14 20:13:35,488 | INFO | uvicorn.error | Started server process [47298]
+2026-04-14 20:13:35,489 | INFO | uvicorn.error | Waiting for application startup.
+2026-04-14 20:13:35,493 | INFO | uvicorn.error | Application startup complete.
+2026-04-14 20:15:01,422 | INFO | watchfiles.main | 1 change detected
+2026-04-14 20:15:01,425 | WARNING | uvicorn.error | WatchFiles detected changes in 'api/whatsapp.py'. Reloading...
+2026-04-14 20:15:01,478 | INFO | uvicorn.error | Shutting down
+2026-04-14 20:15:01,580 | INFO | uvicorn.error | Waiting for application shutdown.
+2026-04-14 20:15:01,582 | INFO | uvicorn.error | Application shutdown complete.
+2026-04-14 20:15:01,582 | INFO | uvicorn.error | Finished server process [47298]
+2026-04-14 20:15:01,968 | INFO | watchfiles.main | 1 change detected
+2026-04-14 20:15:02,333 | INFO | watchfiles.main | 3 changes detected
+2026-04-14 20:15:07,992 | INFO | numexpr.utils | NumExpr defaulting to 10 threads.
+2026-04-14 20:15:09,066 | INFO | uvicorn.error | Started server process [48209]
+2026-04-14 20:15:09,067 | INFO | uvicorn.error | Waiting for application startup.
+2026-04-14 20:15:09,070 | INFO | uvicorn.error | Application startup complete.
+2026-04-14 20:15:33,304 | INFO | watchfiles.main | 1 change detected
+2026-04-14 20:15:33,304 | WARNING | uvicorn.error | WatchFiles detected changes in 'api/whatsapp.py'. Reloading...
+2026-04-14 20:15:33,345 | INFO | uvicorn.error | Shutting down
+2026-04-14 20:15:33,447 | INFO | uvicorn.error | Waiting for application shutdown.
+2026-04-14 20:15:33,448 | INFO | uvicorn.error | Application shutdown complete.
+2026-04-14 20:15:33,448 | INFO | uvicorn.error | Finished server process [48209]
+2026-04-14 20:15:33,826 | INFO | watchfiles.main | 1 change detected
+2026-04-14 20:15:34,190 | INFO | watchfiles.main | 3 changes detected
+2026-04-14 20:15:36,495 | INFO | watchfiles.main | 1 change detected
+2026-04-14 20:15:36,496 | WARNING | uvicorn.error | WatchFiles detected changes in 'api/whatsapp.py'. Reloading...
+2026-04-14 20:15:40,104 | INFO | numexpr.utils | NumExpr defaulting to 10 threads.
+2026-04-14 20:15:41,195 | INFO | uvicorn.error | Started server process [48565]
+2026-04-14 20:15:41,197 | INFO | uvicorn.error | Waiting for application startup.
+2026-04-14 20:15:41,200 | INFO | uvicorn.error | Application startup complete.
+2026-04-14 20:15:41,201 | INFO | uvicorn.error | Shutting down
+2026-04-14 20:15:41,302 | INFO | uvicorn.error | Waiting for application shutdown.
+2026-04-14 20:15:41,303 | INFO | uvicorn.error | Application shutdown complete.
+2026-04-14 20:15:41,303 | INFO | uvicorn.error | Finished server process [48565]
+2026-04-14 20:15:41,681 | INFO | watchfiles.main | 2 changes detected
+2026-04-14 20:15:41,682 | WARNING | uvicorn.error | WatchFiles detected changes in 'api/whatsapp.py'. Reloading...
+2026-04-14 20:15:42,158 | INFO | watchfiles.main | 3 changes detected
+2026-04-14 20:15:47,373 | INFO | numexpr.utils | NumExpr defaulting to 10 threads.
+2026-04-14 20:15:48,294 | INFO | uvicorn.error | Started server process [48700]
+2026-04-14 20:15:48,296 | INFO | uvicorn.error | Waiting for application startup.
+2026-04-14 20:15:48,299 | INFO | uvicorn.error | Application startup complete.
+2026-04-14 20:15:55,231 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:15:55,337 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:15:55,482 | INFO | watchfiles.main | 2 changes detected
+2026-04-14 20:15:59,211 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:15:59,221 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:15:59,241 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:15:59,250 | INFO | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-04-14 20:16:00,854 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:16:00,896 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:00,936 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:17,130 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:17,150 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:16:18,564 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:18,566 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:18,585 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:16:21,079 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:16:21,123 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:21,162 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:28,118 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:28,140 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:16:29,888 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:29,898 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:29,936 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:29,938 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:29,957 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:16:31,627 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:16:33,163 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:16:33,207 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:33,209 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:33,213 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:33,255 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:53,147 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:53,168 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:16:54,981 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:54,985 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:55,025 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:55,029 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:55,048 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:16:56,854 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:16:56,897 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:56,899 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:56,903 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:16:56,942 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:17:26,934 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:17:26,955 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:17:54,165 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:17:54,169 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:17:54,207 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:17:54,211 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:17:54,231 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:17:57,646 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:18:00,920 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:18:00,966 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:18:00,967 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:18:00,971 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:18:01,014 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:19,612 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:19,635 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:19:22,759 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:22,764 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:22,806 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:22,808 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:22,828 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:19:22,843 | INFO | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-04-14 20:19:24,589 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:19:24,640 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:24,642 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:24,648 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:24,690 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:42,513 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:42,533 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:19:44,556 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:44,560 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:44,603 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:44,606 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:44,626 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:19:44,632 | INFO | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-04-14 20:19:47,623 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:19:47,671 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:47,672 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:47,675 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:19:47,718 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:20:02,477 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:20:02,497 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:20:04,628 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:20:04,631 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:20:04,676 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:20:04,684 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:20:04,704 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:20:07,182 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:20:10,053 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:20:13,222 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:20:13,235 | INFO | tools.appointment_scheduler | Appointment created successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5, appointment_id=d0793160-c253-4192-87d5-e06727b50fa5
+2026-04-14 20:20:16,343 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:20:16,391 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:20:16,393 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:20:16,398 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:20:16,440 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:21:07,095 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:21:07,117 | INFO | state.state_manager | Redis MISS | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Building state
+2026-04-14 20:21:08,740 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:21:08,742 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:21:08,762 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:21:08,773 | INFO | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-04-14 20:21:09,983 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:21:10,027 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:21:10,153 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:21:36,706 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:21:36,728 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:21:38,613 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:21:38,616 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:21:38,635 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:21:38,640 | INFO | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-04-14 20:21:40,926 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:21:40,973 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:21:41,104 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:21:56,570 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:21:56,590 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:21:58,429 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:21:58,431 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:21:58,450 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:22:00,151 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:22:00,197 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:00,240 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:06,479 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:06,498 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:22:07,938 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:07,945 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:07,989 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:07,994 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:08,014 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:22:10,098 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:22:11,756 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:22:11,800 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:11,801 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:11,805 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:11,843 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:26,909 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:26,930 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:22:29,073 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:29,076 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:29,123 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:29,127 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:29,148 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:22:30,950 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:22:30,992 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:30,993 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:30,994 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:31,034 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:45,396 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:45,418 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:22:48,165 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:48,169 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:48,207 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:48,211 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:48,231 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:22:51,023 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:22:51,068 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:51,069 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:51,074 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:22:51,114 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:23:19,086 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:23:19,107 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:23:20,728 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:23:20,733 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:23:20,770 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:23:20,775 | INFO | state.state_manager | Customer fetched | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:23:20,794 | INFO | state.state_manager | Redis HIT | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5. Returning state
+2026-04-14 20:23:23,484 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:23:26,660 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:23:29,935 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:23:29,955 | INFO | tools.appointment_scheduler | Appointment created successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5, appointment_id=14a2a921-1feb-4d7c-bf14-a4a185f08f57
+2026-04-14 20:23:32,085 | INFO | httpx | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-14 20:23:32,133 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:23:32,135 | INFO | state.state_manager | Persistent fields detected. Updating DB | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:23:32,139 | INFO | state.state_manager | Customer updated successfully | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:23:32,178 | INFO | state.state_manager | Redis state updated | user_id=888cc2ad-12bd-4858-a93f-f34e015bc9e5
+2026-04-14 20:39:45,431 | INFO | uvicorn.error | Shutting down
+2026-04-14 20:39:45,538 | INFO | uvicorn.error | Waiting for application shutdown.
+2026-04-14 20:39:45,540 | INFO | uvicorn.error | Application shutdown complete.
+2026-04-14 20:39:45,541 | INFO | uvicorn.error | Finished server process [48700]
+2026-04-14 20:39:45,600 | INFO | uvicorn.error | Stopping reloader process [43495]

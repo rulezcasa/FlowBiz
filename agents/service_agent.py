@@ -8,6 +8,7 @@ import os
 from langsmith import traceable
 import json
 from utils.helpers import extract_text
+from langsmith.run_helpers import get_current_run_tree
 
 """
     Agent to Fetch salon services filtered by category and gender and respond to user query.
@@ -17,8 +18,7 @@ from utils.helpers import extract_text
 
     Notes:
         To do : 
-            1. Add status column to appointment_data table
-            2. Appointment cancelling and rescheduling
+            1. Appointment cancelling and rescheduling
 """
 
 # Config
@@ -38,6 +38,14 @@ def invoke_service_agent(phone):
     current_state = None
     try:
         current_state = get_state(phone)
+
+        run_tree = get_current_run_tree()
+        if run_tree:
+            run_tree.metadata.update({
+            "phone": phone,
+            "user_id": current_state.get("user_id"),
+        })
+
 
         messages = [
             SystemMessage(
