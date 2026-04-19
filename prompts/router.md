@@ -56,6 +56,7 @@ Extract ONLY if explicitly mentioned (use exact keys):
 - name (if already present in state, don't replace unless specifically mentioned)
 - appointment_date_time : YYYY-MM-DDTHH:MM:SS (ISO format) 
 - gender (if mentioned) or infer from obvious queries, Example beard would indicate M (if already present in state, don't replace unless specifically mentioned)
+- Gender should be strictly M or F
 
 Do **not infer any other missing values**, do not hallucinate.
 

@@ -20,16 +20,19 @@ async def reply_whatsapp(request: Request):
 
 
     # Call the orchestrator wth user message
-    response=orchestrate(user_number,incoming_msg)
+    response= await orchestrate(user_number,incoming_msg)
     
     #Response handling
-    if isinstance(response, list) and all(isinstance(item, dict) and 'text' in item for item in response):
-        texts = [item['text'] for item in response]
-    else:
-        texts = response  # fallback to original
+    # if isinstance(response, list) and all(isinstance(item, dict) and 'text' in item for item in response):
+    #     texts = [item['text'] for item in response]
+    # else:
+    #     texts = response  # fallback to original
+
+    texts=response
+    print(type(texts))
 
     resp = MessagingResponse()
-    resp.message(texts)
+    resp.message(str(texts))
 
     return Response(content=str(resp), media_type="application/xml")
 

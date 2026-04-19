@@ -24,7 +24,8 @@ from langsmith.run_helpers import get_current_run_tree
 # Config
 load_dotenv()
 GOOGLE_KEY = os.getenv("GOOGLE_API_KEY")
-model = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=GOOGLE_KEY)
+MODEL=os.getenv("MODEL")
+model = ChatGoogleGenerativeAI(model=MODEL, google_api_key=GOOGLE_KEY)
 with open("prompts/service_agent.md", "r", encoding="utf-8") as f:
     system_prompt = f.read()
 
@@ -34,10 +35,10 @@ agent = create_agent(model=model, tools=[get_services], system_prompt=system_pro
 
 # Call Service Agent
 @traceable(name="Service Agent Run")
-def invoke_service_agent(phone):
+async def invoke_service_agent(phone):
     current_state = None
     try:
-        current_state = get_state(phone)
+        current_state = await get_state(phone)
 
         run_tree = get_current_run_tree()
         if run_tree:
@@ -54,11 +55,11 @@ def invoke_service_agent(phone):
             HumanMessage(content=current_state["user_message"]),  # User query
         ]
 
-        response = agent.invoke(
+        response = await agent.ainvoke(
             {"messages": messages},
         )
         return extract_text(response)
 
     finally:
         if current_state:
-            update_state(phone, {"active_agent": None})
+            await update_state(phone, {"active_agent": None})

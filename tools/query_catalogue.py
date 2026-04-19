@@ -20,41 +20,41 @@ from typing import List
 
 
 @tool(description="Return available services based on the specified category and gender", return_direct=False)
-def get_services(category: List[str], gender: str) -> str:
-    db = psqlSession()
-    try:
-        query = text("""
-            SELECT service_name, price, metadata, description
-            FROM profile_saloons.service_menu
-            WHERE category = ANY(:category)
-              AND gender = :gender
-        """)
+async def get_services(category: List[str], gender: str) -> str:
+    async with psqlSession() as db:
+        try:
+            query = text("""
+                SELECT service_name, price, metadata, description
+                FROM profile_saloons.service_menu
+                WHERE category = ANY(:category)
+                  AND gender = :gender
+            """)
 
-        result = db.execute(query, {
-            "category": category,  # pass list directly
-            "gender": gender
-        })
+            result = await db.execute(query, {
+                "category": category,
+                "gender": gender
+            })
 
-        rows = result.fetchall()
+            rows = result.mappings().all()
 
-        if not rows:
-            return f"No services found for categories '{category}' and gender '{gender}'."
+            if not rows:
+                return f"No services found for categories {category} and gender '{gender}'."
 
-        formatted = []
+            formatted = []
 
-        for r in rows:
-            metadata_str = json.dumps(r.metadata) if r.metadata else "{}"
+            for r in rows:
+                metadata_str = json.dumps(r["metadata"]) if r["metadata"] else "{}"
 
-            formatted.append(
-                f"Service: {r.service_name}\n"
-                f"Price: {r.price}\n"
-                f"Description: {r.description}\n"
-                f"Metadata: {metadata_str}"
-            )
+                formatted.append(
+                    f"Service: {r['service_name']}\n"
+                    f"Price: {r['price']}\n"
+                    f"Description: {r['description']}\n"
+                    f"Metadata: {metadata_str}"
+                )
 
-        return "\n\n".join(formatted)
+            return "\n\n".join(formatted)
 
-    finally:
-        db.close()
+        except Exception:
+            raise
     
 

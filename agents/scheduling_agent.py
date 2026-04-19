@@ -13,6 +13,7 @@ from tools.appointment_scheduler import (
 from langsmith import traceable
 from utils.helpers import timestamp_to_day_of_week
 from langsmith.run_helpers import get_current_run_tree
+from utils.helpers import extract_text
 
 """
 Agent to schedule appointments
@@ -34,7 +35,8 @@ To do:
 # Config
 load_dotenv()
 GOOGLE_KEY = os.getenv("GOOGLE_API_KEY")
-model = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=GOOGLE_KEY)
+MODEL=os.getenv("MODEL")
+model = ChatGoogleGenerativeAI(model=MODEL, google_api_key=GOOGLE_KEY)
 with open("prompts/scheduling_agent.md", "r", encoding="utf-8") as f:
     system_prompt = f.read()
 
@@ -48,10 +50,10 @@ agent = create_agent(
 
 # Call General Agent
 @traceable(name="Scheduling Agent Run")
-def invoke_scheduling_agent(phone):
+async def invoke_scheduling_agent(phone):
     current_state = None
     try:
-        current_state = get_state(phone)
+        current_state = await get_state(phone)
         if current_state.get("entities", {}).get("appointment_date_time", {}):
             current_state["day_of_week"] = timestamp_to_day_of_week(
                 current_state["entities"]["appointment_date_time"]
@@ -64,14 +66,14 @@ def invoke_scheduling_agent(phone):
             HumanMessage(content=current_state["user_message"]),  # User query
         ]
 
-        response = agent.invoke(
+        response = await agent.ainvoke(
             {"messages": messages}
         )
 
-        return response["messages"][-1].content[0]["text"]
+        return extract_text(response)
     finally:
         if current_state:
-            update_state(
+            await update_state(
                 phone,
                 {
                     "active_agent": None,

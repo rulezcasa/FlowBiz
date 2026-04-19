@@ -5,6 +5,9 @@ from state.state_manager import get_state, update_state
 import os
 from langsmith import traceable
 from langsmith.run_helpers import get_current_run_tree
+from langchain.messages import SystemMessage, HumanMessage
+import json
+from utils.helpers import extract_text
 
 """
     Agent to answer general questions about the saloon
@@ -16,7 +19,8 @@ from langsmith.run_helpers import get_current_run_tree
 # Config
 load_dotenv()
 GOOGLE_KEY = os.getenv("GOOGLE_API_KEY")
-model = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=GOOGLE_KEY)
+MODEL=os.getenv("MODEL")
+model = ChatGoogleGenerativeAI(model=MODEL, google_api_key=GOOGLE_KEY)
 with open("prompts/general_agent.md", "r", encoding="utf-8") as f:
     system_prompt = f.read()
 
@@ -26,10 +30,10 @@ agent = create_agent(model=model, system_prompt=system_prompt)
 
 # Call General Agent
 @traceable(name="General Agent Run")
-def invoke_general_agent(phone):
+async def invoke_general_agent(phone):
     current_state = None
     try:
-        current_state = get_state(phone)
+        current_state = await get_state(phone)
 
         run_tree = get_current_run_tree()
         if run_tree:
@@ -37,12 +41,19 @@ def invoke_general_agent(phone):
             "phone": phone,
             "user_id": current_state.get("user_id"),
         })
+            
+        messages = [
+        SystemMessage(
+            content = f"Customer name: {current_state.get('entities', {}).get('name', 'Unknown')}"
+        ),
+        HumanMessage(content=current_state["user_message"]),
+        ]
 
-        response = agent.invoke(
-            {"messages": [{"role": "user", "content": current_state["user_message"]}]},
+        response = await agent.ainvoke(
+            {"messages": messages},
         )
 
-        return response["messages"][-1].content
+        return extract_text(response)
     finally:
         if current_state:
-            update_state(phone, {"active_agent": None})
+            await update_state(phone, {"active_agent": None})
