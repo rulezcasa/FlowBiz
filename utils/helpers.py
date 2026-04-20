@@ -12,7 +12,7 @@ def extract_text(response):
             if isinstance(block, dict) and "text" in block:
                 return block["text"]
 
-    return ""
+    return "Couldn't extract text from response"
 
 
 # Utility Function - Convert timestamp to day of the week

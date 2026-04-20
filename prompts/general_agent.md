@@ -49,7 +49,6 @@ Timings:
 Contact:
 - Phone / WhatsApp: +91-4534853839
 - Alternate Number: +91-2384584293
-- WhatsApp is recommended for faster communication
 
 Pricing:
 - Prices vary depending on service

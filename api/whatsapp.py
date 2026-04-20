@@ -1,10 +1,16 @@
 from fastapi import APIRouter, Request, Response
 from twilio.twiml.messaging_response import MessagingResponse
 from orchestrator.router import orchestrate
+import time
+from config.logger import logging
+import asyncio
+from api.phone_alert import alert_staff
 
 '''
 Twillio whatsapp webhook implementation
 '''
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -19,20 +25,23 @@ async def reply_whatsapp(request: Request):
     user_number = user_number[-10:]
 
 
-    # Call the orchestrator wth user message
-    response= await orchestrate(user_number,incoming_msg)
-    
-    #Response handling
-    # if isinstance(response, list) and all(isinstance(item, dict) and 'text' in item for item in response):
-    #     texts = [item['text'] for item in response]
-    # else:
-    #     texts = response  # fallback to original
+    # Call the orchestrator wth a timeout
+    try:
+        # enforce timeout
+        response = await asyncio.wait_for(
+            orchestrate(user_number, incoming_msg),
+            timeout=12
+        )
+        texts = response
 
-    texts=response
-    print(type(texts))
+    except asyncio.TimeoutError:
+        logger.error("Response timed out > 15s")
+        texts = "Sorry, our auto-chat is facing some issues. This has been flagged and our staff will reach out to you or please try again later. \n\n" \
+        "If urgent, please call us on +91-4534853839 (working hours : 9:00AM to 9:00PM)."
+        alert_staff(user_number, 'chatbot_failure')
 
     resp = MessagingResponse()
-    resp.message(str(texts))
+    resp.message(texts)
 
     return Response(content=str(resp), media_type="application/xml")
 
