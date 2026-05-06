@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 
 '''
-Send alerts to staff incase of system disfunction
+Twillio SMS implementation for staff alerts
 '''
 
 load_dotenv()

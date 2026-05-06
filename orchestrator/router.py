@@ -10,6 +10,7 @@ import json
 from collections import deque
 from langsmith.run_helpers import get_current_run_tree
 from utils.helpers import extract_text
+from langsmith import traceable
 
 """
     Orchestrator model to extract intent, build state and dispatch queries to agents
@@ -47,8 +48,17 @@ async def dispatcher(phone, agent):
     
 
 # Orchestrator : Entry point into the agentic layer - extracts intent/entities and calls dispatcher.
+@traceable(name="Orchestrator Run")
 async def orchestrate(phone,message=None):
     saved_state=await get_state(phone)
+
+    run_tree = get_current_run_tree()
+    if run_tree:
+        run_tree.metadata.update({
+        "phone": phone,
+        "user_id": saved_state.get("user_id"),
+    })
+            
     history = saved_state.get("conversation_history", []) # Retrieve conversation history if available
     history = deque(history, maxlen=5) # Conversation history of size 5 (deque)
 

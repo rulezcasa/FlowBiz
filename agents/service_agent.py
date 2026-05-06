@@ -14,11 +14,8 @@ from langsmith.run_helpers import get_current_run_tree
     Agent to Fetch salon services filtered by category and gender and respond to user query.
 
     Returns:
-        str: User friendly LLM response with appointment confirmation
+        str: User friendly LLM response with service response
 
-    Notes:
-        To do : 
-            1. Appointment cancelling and rescheduling
 """
 
 # Config

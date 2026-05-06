@@ -19,7 +19,7 @@ from utils.helpers import extract_text
 Agent to schedule appointments
 
     Returns:
-        str: User friendly LLM response.
+        str: User friendly LLM response with appointment confirmation
 
 Notes:
     1. Uses time only for checking stylist schedule and timestamp for appointment conflict check
@@ -54,6 +54,14 @@ async def invoke_scheduling_agent(phone):
     current_state = None
     try:
         current_state = await get_state(phone)
+
+        run_tree = get_current_run_tree()
+        if run_tree:
+            run_tree.metadata.update({
+            "phone": phone,
+            "user_id": current_state.get("user_id"),
+        })
+            
         if current_state.get("entities", {}).get("appointment_date_time", {}):
             current_state["day_of_week"] = timestamp_to_day_of_week(
                 current_state["entities"]["appointment_date_time"]
