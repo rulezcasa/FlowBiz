@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from api import whatsapp
+from messaging import routes
 
 '''
 Fastapi entry point
@@ -8,5 +8,5 @@ Fastapi entry point
 app = FastAPI()
 
 app.include_router(
-    whatsapp.router,
+    routes.router,
 )

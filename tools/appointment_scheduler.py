@@ -118,6 +118,10 @@ async def create_appointment(
     start_time: str,
     end_time: str
 ) -> str:
+    
+    start_time_obj = datetime.fromisoformat(start_time)
+    end_time_obj = datetime.fromisoformat(end_time)
+
     async with psqlSession() as db:
         try:
             query = text("""
@@ -144,8 +148,8 @@ async def create_appointment(
                 "stylist_id": stylist_id,
                 "user_id": user_id,
                 "service_id": service_id,
-                "start_time": start_time,
-                "end_time": end_time
+                "start_time": start_time_obj,
+                "end_time": end_time_obj
             })
 
             appointment_id = result.scalar()
