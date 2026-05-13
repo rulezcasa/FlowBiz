@@ -179,3 +179,14 @@ async def update_state(phone, updated_state):
     logger.info(f"Redis state updated | user_id={merged_state['user_id']}")
 
     return merged_state
+
+
+async def is_bot_disabled() -> bool:
+    key = "config:bot_disabled"
+    value = await redisSession.get(key)
+    return value == "true"  # True = disabled, False = active
+
+async def set_bot_status(disabled: bool):
+    key = "config:bot_disabled"
+    await redisSession.set(key, "true" if disabled else "false")
+
